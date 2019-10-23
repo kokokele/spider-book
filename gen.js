@@ -1,28 +1,41 @@
 const epub = require('epub-gen');
+const config = require('./config.js');
+const json = require(`./wangushendi.json`);
+const SIZE = 1000;
 
-const json = require('./data.json');
 
-const START = 2000;
-const END = json.length;
+run();
 
-const data = json.slice(START, END);
-genEpub(data, 'ws' + START + '-' + END);
+function run() {
+  let start = 0;
+  const len = json.length;
+  while(1) {
+    let end = SIZE + start; 
+    end = Math.min(len, end);
+    const data = json.slice(start, end);
+    console.log(data[0].html);
+    genEpub(data, config.bookName + start + end);
+
+    start = end;
+    if (start >= len) break;
+  }
+}
 
 
 function genEpub(contentArr, fileName) {
   const content = contentArr.map(item => {
     return {
       title:  item.title,
-      data: item.html,
-      author: '蜗牛狂奔'
+      data: '<div>' +  item.html + '</div>',
+      author: config.chapterAuthor
     };
   })
 
   const option = {
-    title: "wushangshendi", // *Required, title of the book.
+    title: config.bookName, // *Required, title of the book.
     author: "zp", // *Required, name of the author.
     publisher: "🐌", // optional
-    cover: "https://segmentfault.com/img/remote/1460000020416586?w=887&h=410", // Url or File path, both ok.
+    cover: config.cover, // Url or File path, both ok.
     content
 };
 

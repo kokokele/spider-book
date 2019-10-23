@@ -1,17 +1,14 @@
-const fetch = require('fetch').fetchUrl;
-const cheerio = require('cheerio');
-const epub = require('epub-gen');
-
-
-const INDEX_URL = 'https://www.biduo.cc/biquge/37_37732/';
-const QueuePromise = require('promise-queue-easy');
 const fs = require('fs');
 
+const fetch = require('fetch').fetchUrl;
+const cheerio = require('cheerio');
+const config  = require('./config.js');
+const QueuePromise = require('promise-queue-easy');
+
+// const INDEX_URL = 'https://www.biduo.cc/biquge/37_37732/';
+const INDEX_URL = config.indexURL;
 
 fetch(INDEX_URL, function(error, meta, body) {
-  // console.log('meta:', meta);
-  // console.log('\n');
-  // console.log(body.toString());
   const $ = cheerio.load(body.toString());
 
   const arr = [];
@@ -35,7 +32,7 @@ async function batchForHtml(arr) {
   const qp = new QueuePromise(pall, {
     callback: function() {
       console.log('===all done===');
-      fs.writeFileSync('./data.json', JSON.stringify(contentArr));
+      fs.writeFileSync(`./${config.bookName}.json`, JSON.stringify(contentArr));
     },
     errorInterrupt: false
   });
@@ -43,7 +40,7 @@ async function batchForHtml(arr) {
   let index = 0;
 
   qp.on('success', res => {
-    console.log('success', ++index);
+    console.log('success', ++index, res.title);
     contentArr.push(res);
   });
   qp.run();
