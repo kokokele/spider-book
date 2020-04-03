@@ -1,6 +1,6 @@
 const epub = require('epub-gen');
 const config = require('./config.js');
-const json = require(`./wangushendi.json`);
+const json = require(`./${config.bookName}.json`);
 const SIZE = 1000;
 
 
@@ -14,7 +14,7 @@ function run() {
     end = Math.min(len, end);
     const data = json.slice(start, end);
     console.log(data[0].html);
-    genEpub(data, config.bookName + start + end);
+    genEpub(data, config.bookName + '^' + start + '-' + end);
 
     start = end;
     if (start >= len) break;
@@ -24,6 +24,7 @@ function run() {
 
 function genEpub(contentArr, fileName) {
   const content = contentArr.map(item => {
+    console.log('title:', item.title);
     return {
       title:  item.title,
       data: '<div>' +  item.html + '</div>',
@@ -37,7 +38,7 @@ function genEpub(contentArr, fileName) {
     publisher: "🐌", // optional
     cover: config.cover, // Url or File path, both ok.
     content
-};
+  };
 
   new epub(option, "./" + fileName + ".epub");
 }

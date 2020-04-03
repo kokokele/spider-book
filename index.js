@@ -13,41 +13,66 @@ fetch(INDEX_URL, function(error, meta, body) {
 
   const arr = [];
   const h = $('.box_con #list dl dd').each(function(i, elem) {
-    const uri = $(elem).find('a').attr('href');
-    arr.push(uri);
+    let url = $(elem).find('a').attr('href');
+    arr.push(config.domain + url);
   });
-
   batchForHtml(arr);
 });
 
 async function batchForHtml(arr) {
-  const pall = arr.map(item => {
-    const url = INDEX_URL + item;
-    return function() {
-      return fetchItem(url);
-    }
-  });
+  const concurrency = config.concurrency;
+  const len = arr.length;
+  const listLen = Math.ceil(len /  concurrency);
+  // console.log('listLen:', listLen, len, concurrency);
+  const queuePromiseList = [];
+  for(let i = 0; i < concurrency; i++) {
+    const start = i * listLen;
+    const end = Math.min(start + listLen - 1, len - 1);
+    const tempArr = arr.slice(start, end + 1);
 
-  const contentArr = [];
-  const qp = new QueuePromise(pall, {
-    callback: function() {
-      console.log('===all done===');
-      fs.writeFileSync(`./${config.bookName}.json`, JSON.stringify(contentArr));
-    },
-    errorInterrupt: false
-  });
-
-  let index = 0;
-
-  qp.on('success', res => {
-    console.log('success', ++index, res.title);
-    contentArr.push(res);
-  });
-  qp.run();
+    console.log('index:', i,  'start:', start, 'end:', end, 'total:', len);
+    queuePromiseList.push(startQueue(tempArr));
+  }
+  Promise.all(queuePromiseList).then(res => {
+    console.log('all done!!!');
+    let list = [];
+    res.forEach(item => {
+      list = list.concat(item);
+    });
+    fs.writeFileSync(`./${config.bookName}.json`, JSON.stringify(list));
+  })
 }
 
+function startQueue(arr) {
+  return new Promise((resolve, reject) => {
+    const pall = arr.map(url => {
+      return function() {
+        return fetchItem(url);
+      }
+    });
+  
+    const contentArr = [];
+    const qp = new QueuePromise(pall, {
+      callback: function() {
+        console.log('===all done===');
+        resolve(contentArr);
+      },
+      errorInterrupt: false
+    });
+  
+    let index = 0;
+  
+    qp.on('success', res => {
+      console.log('success', ++index, res.title);
+      contentArr.push(res);
+    });
+    qp.run();
+  });
+  
+}
 
 function fetchItem(url) {
+  console.log(url)
 
   return new Promise(function(reslove, reject) {
     fetch(url, function(error, meta, body) {
@@ -56,6 +81,7 @@ function fetchItem(url) {
   
       const html = $('#content').html();
       const title  = $('.bookname h1').text();
+      // console.log('title:', title);
       reslove({
         html,
         title

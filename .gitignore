@@ -1,3 +1,4 @@
 node_modules
 *.epub
 *.json
+.DS_Store
