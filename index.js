@@ -11,6 +11,14 @@ const INDEX_URL = config.indexURL;
 fetch(INDEX_URL, function(error, meta, body) {
   const $ = cheerio.load(body.toString());
 
+  if(!config.bookName) config.bookName = $('.box_con #info h1').text();
+  if(!config.author) {
+    const author = $('.box_con #info p').first().text();
+
+    config.author = author.split('：')[1];
+  }
+  console.log('bookName:', $('.box_con #info h1').text(), config.author);
+
   const arr = [];
   const h = $('.box_con #list dl dd').each(function(i, elem) {
     let url = $(elem).find('a').attr('href');
@@ -40,6 +48,9 @@ async function batchForHtml(arr) {
       list = list.concat(item);
     });
     fs.writeFileSync(`./${config.bookName}.json`, JSON.stringify(list));
+
+    // 开始制作epub
+    require('./gen.js');
   })
 }
 
