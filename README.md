@@ -1,6 +1,6 @@
 # spider-book
 爬取线上书籍变成epub格式，方便阅读；
-目前支持 https://www.biduo.cc/ 网站的书籍
+目前支持 笔趣阁 https://www.biduo.cc/ 网站的书籍
 
 ## how
 1. 配置config.js
