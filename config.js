@@ -1,14 +1,14 @@
 module.exports = {
-	domain: 'https://www.dgzcgs.com',
-	indexURL :'https://www.biduo.cc/biquge/0_1/', // 
+	domain: 'https://www.feibzw.com/html/38775/',
+	indexURL :'https://www.feibzw.com/html/38775/index.html', // 
 
-	bookName: '书名xxx', 
-	bookAuthor : '作者xxx',
+	bookName: 'LONG', 
+	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
 	cover: '',
 	// 并发数
-	concurrency: 20
+	concurrency: 5
 }
 
 /*

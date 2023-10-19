@@ -19,16 +19,17 @@ const config = require('./config')
 const INDEX_URL = config.indexURL;
 
 fetch(INDEX_URL, function(error, meta, body) {
+  log(body.toString());
   const $ = cheerio.load(body.toString());
 
   const arr = [];
-  const h = $('#list dl a').each(function(i, elem) {
-    let url = $(elem).attr('href');
+  const h = $('.chapterlist li').each(function(i, elem) {
+    let url = $(elem).find('a').attr('href');
     if(url)  {
       arr.push(config.domain + url);
     }
   });
-  // log(arr)
+  log(arr)
   batchForHtml(arr);
 });
 
@@ -93,8 +94,8 @@ function fetchItem(url) {
     fetch(url, function(error, meta, body) {
       const $ = cheerio.load(body.toString());
       
-      const html = $('#chaptercontent').html();
-      const title  = $('.bookname').text();
+      const html = $('#content').html();
+      const title  = $('.chaptertitle').text();
       // console.log('title:', title, 'content:', html);
       reslove({
         html,
