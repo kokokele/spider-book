@@ -1,5 +1,5 @@
 module.exports = {
-	domain: 'https://www.biduo.cc',
+	domain: 'https://www.dgzcgs.com',
 	indexURL :'https://www.biduo.cc/biquge/0_1/', // 
 
 	bookName: '书名xxx', 
