@@ -2,10 +2,10 @@ module.exports = {
 	domain: 'https://www.biduo.cc',
 	indexURL :'https://www.biduo.cc/biquge/0_1/', // 
 
-	/* 默认从网页获取*/
-	// bookName: '书名xxx', 
-	// bookAuthor : '作者xxx',
+	bookName: '书名xxx', 
+	bookAuthor : '作者xxx',
 	chapterAuthor: '-',
+	// 封面图片
 	cover: '',
 	// 并发数
 	concurrency: 20

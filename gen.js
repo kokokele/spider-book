@@ -1,7 +1,13 @@
 const epub = require('epub-gen');
-const config = require('./config.js');
+const config = {
+  chapterAuthor: '一个作者',
+  bookName: 'long',
+  cover: ''
+}
+// const config = require('./config.js');
 const json = require(`./${config.bookName}.json`);
 const SIZE = 1000;
+
 
 
 run();
