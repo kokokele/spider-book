@@ -91,16 +91,21 @@ function fetchItem(url) {
   console.log(url)
 
   return new Promise(function(reslove, reject) {
-    fetch(url, function(error, meta, body) {
-      const $ = cheerio.load(body.toString());
-      
-      const html = $('#content').html();
-      const title  = $('.chaptertitle').text();
-      // console.log('title:', title, 'content:', html);
-      reslove({
-        html,
-        title
+
+    setTimeout(() => {
+      fetch(url, function(error, meta, body) {
+        const $ = cheerio.load(body.toString());
+        
+        const html = $('#content').html();
+        const title  = $('.chaptertitle').text();
+        // console.log('title:', title, 'content:', html);
+        reslove({
+          html,
+          title
+        });
       });
-    });
+    }, 100)
+
+    
   }); 
 }

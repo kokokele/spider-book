@@ -1,14 +1,14 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/html/38775/',
-	indexURL :'https://www.feibzw.com/html/38775/index.html', // 
+	domain: 'https://www.feibzw.com/html/46354/',
+	indexURL :'https://www.feibzw.com/Html/46354/index.html', // 
 
-	bookName: 'LONG', 
+	bookName: ' 医生', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
 	cover: '',
 	// 并发数
-	concurrency: 5
+	concurrency: 2
 }
 
 /*
