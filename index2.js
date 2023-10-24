@@ -104,7 +104,7 @@ function fetchItem(url) {
           title
         });
       });
-    }, 100)
+    }, 10)
 
     
   }); 

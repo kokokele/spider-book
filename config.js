@@ -8,7 +8,7 @@ module.exports = {
 	// 封面图片
 	cover: '',
 	// 并发数
-	concurrency: 2
+	concurrency: 20
 }
 
 /*
