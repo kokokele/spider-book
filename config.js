@@ -1,8 +1,8 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/html/46354/',
-	indexURL :'https://www.feibzw.com/Html/46354/index.html', // 
+	domain: 'https://www.feibzw.com/Html/35181/',
+	indexURL :'https://www.feibzw.com/Html/35181/index.html', // 
 
-	bookName: ' 医生', 
+	bookName: '一剑', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
