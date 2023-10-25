@@ -1,8 +1,8 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/Html/35181/',
-	indexURL :'https://www.feibzw.com/Html/35181/index.html', // 
+	domain: 'https://www.feibzw.com/Html/29312/',
+	indexURL :'https://www.feibzw.com/Html/29312/index.html', // 
 
-	bookName: '一剑', 
+	bookName: '大秦', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
