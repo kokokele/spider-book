@@ -1,8 +1,8 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/Html/29312/',
-	indexURL :'https://www.feibzw.com/Html/29312/index.html', // 
+	domain: 'https://www.feibzw.com/Html/1930/',
+	indexURL :'https://www.feibzw.com/Html/1930/index.html', // 
 
-	bookName: '大秦', 
+	bookName: '最后一个道士', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
