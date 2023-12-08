@@ -2,13 +2,13 @@ module.exports = {
 	domain: 'https://www.feibzw.com/Html/1930/',
 	indexURL :'https://www.feibzw.com/Html/1930/index.html', // 
 
-	bookName: '最后一个道士', 
+	bookName: ' 神控天下', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
 	cover: '',
 	// 并发数
-	concurrency: 20
+	concurrency: 5
 }
 
 /*

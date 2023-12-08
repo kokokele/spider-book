@@ -18,6 +18,7 @@ const config = require('./config')
 
 const INDEX_URL = config.indexURL;
 
+//  获取章节列表 
 fetch(INDEX_URL, function(error, meta, body) {
   log(body.toString());
   const $ = cheerio.load(body.toString());
@@ -80,7 +81,7 @@ function startQueue(arr) {
     let index = 0;
   
     qp.on('success', res => {
-      // console.log('success', ++index, res.title);
+      console.log('success', ++index, res.title);
       contentArr.push(res);
     });
     qp.run();
@@ -88,7 +89,7 @@ function startQueue(arr) {
 }
 
 function fetchItem(url) {
-  console.log(url)
+  // console.log(url)
 
   return new Promise(function(reslove, reject) {
 
@@ -98,7 +99,7 @@ function fetchItem(url) {
         
         const html = $('#content').html();
         const title  = $('.chaptertitle').text();
-        // console.log('title:', title, 'content:', html);
+        // console.log('title:', title);
         reslove({
           html,
           title
