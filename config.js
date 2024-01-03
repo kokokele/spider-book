@@ -1,12 +1,12 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/Html/1930/',
-	indexURL :'https://www.feibzw.com/Html/1930/index.html', // 
+	domain: 'https://www.feibzw.com/Html/48224/',
+	indexURL :'https://www.feibzw.com/Html/48224/index.html', // 
 
-	bookName: ' 神控天下', 
+	bookName: '老六', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
-	cover: '',
+	cover: '', 
 	// 并发数
 	concurrency: 5
 }
