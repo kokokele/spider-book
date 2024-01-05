@@ -1,14 +1,14 @@
 module.exports = {
-	domain: 'https://www.feibzw.com/Html/48224/',
-	indexURL :'https://www.feibzw.com/Html/48224/index.html', // 
+	domain: 'https://www.feibzw.com/Html/39522/',
+	indexURL :'https://www.feibzw.com/Html/39522/index.html', // 
 
-	bookName: '老六', 
+	bookName: 'xinglong', 
 	bookAuthor : 'x',
 	chapterAuthor: '-',
 	// 封面图片
 	cover: '', 
 	// 并发数
-	concurrency: 5
+	concurrency: 1
 }
 
 /*

@@ -18,8 +18,22 @@ const config = require('./config')
 
 const INDEX_URL = config.indexURL;
 
+const opt = {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4240.75 Safari/537.36'
+    }
+}
+
+function sleep(time = 0) {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          resolve();
+      }, time);
+  });
+}
+
 //  获取章节列表 
-fetch(INDEX_URL, function(error, meta, body) {
+fetch(INDEX_URL, opt, function(error, meta, body) {
   log(body.toString());
   const $ = cheerio.load(body.toString());
 
@@ -30,8 +44,16 @@ fetch(INDEX_URL, function(error, meta, body) {
       arr.push(config.domain + url);
     }
   });
+
   log(arr)
-  batchForHtml(arr);
+
+  if(arr.length) {
+    setTimeout(() => {
+      batchForHtml(arr);
+    }, 200);
+  } else {
+    log('# 加载首页失败 #');
+  }
 });
 
 async function batchForHtml(arr) {
@@ -94,18 +116,20 @@ function fetchItem(url) {
   return new Promise(function(reslove, reject) {
 
     setTimeout(() => {
-      fetch(url, function(error, meta, body) {
+      fetch(url, opt, function(error, meta, body) {
+        
         const $ = cheerio.load(body.toString());
         
         const html = $('#content').html();
         const title  = $('.chaptertitle').text();
         // console.log('title:', title);
+        if(!title) log(body.toString());
         reslove({
           html,
           title
         });
       });
-    }, 10)
+    }, 100)
 
     
   }); 
